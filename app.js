@@ -9,14 +9,22 @@ async function fetchWeather() {
     }
 
     try {
-        const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q=${city}`);
-        if (!response.ok) throw new Error("Failed to fetch weather data.");
+        const apiKey = "877de1e0e8b04a1ba80235309252603 "; // Replace with your actual API key
+        const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
         const data = await response.json();
+        console.log("Weather Data:", data); // Debugging log
+
         displayWeather(data);
     } catch (error) {
         console.error("Error fetching weather:", error);
-        alert("Could not fetch weather. Please check the city name.");
+        alert("Could not fetch weather. Please check the city name or try again later.");
     }
 }
 
@@ -32,7 +40,6 @@ function displayWeather(data) {
     `;
 }
 
-// Attach event listener to button when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelector("button").addEventListener("click", fetchWeather);
 });
