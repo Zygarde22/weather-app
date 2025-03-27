@@ -42,9 +42,4 @@ Here are the screenshots showing different parts of the weather app in action:
    ![Weather App Screenshot 3](assets/cap4.JPG)
 
 ---
-
-### How to Run the Project:
-1. Clone this repository to your local machine.
-2. Install the necessary dependencies:
-   ```bash
-   npm install
+ 
