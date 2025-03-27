@@ -6,6 +6,37 @@
     <title>Weather For You</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="app.js" defer></script>
+    <style>
+        /* Full-screen position for the video background */
+        #easter-egg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* The video stays in the background */
+            display: none; /* Hidden by default */
+        }
+
+        /* Ensure the video is full-screen */
+        #easter-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure the video covers the entire screen */
+        }
+
+        /* Image displayed in front of the video */
+        #easter-image {
+            z-index: 1; /* Image stays above the video */
+            position: relative;
+            display: block;
+            margin: 0 auto;
+            max-width: 80%; /* Optional: limits image size */
+        }
+    </style>
 </head>
 <body class="flex items-center justify-center min-h-screen bg-blue-100">
     <div class="bg-white p-6 rounded-xl shadow-lg text-center">
@@ -23,5 +54,39 @@
     </div>
 
     <div id="weather-info" class="mt-4 text-gray-700"></div>
+
+    <!-- Hidden Easter Egg Section -->
+    <div id="easter-egg">
+        <!-- YouTube Video as Background -->
+        <iframe id="easter-video" 
+                src="https://www.youtube.com/embed/0k1_aKPIdnU?autoplay=1&mute=1&controls=0&loop=1&playlist=0k1_aKPIdnU" 
+                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        
+        <!-- Easter Image -->
+        <img id="easter-image" src="assets/mantismen.jpg" alt="Easter Egg">
+    </div>
+
+    <script>
+        let easterEggVisible = false;
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key.toLowerCase() === 'e') {
+                easterEggVisible = !easterEggVisible; // Toggle visibility
+                
+                const easterEgg = document.getElementById('easter-egg');
+                const easterVideo = document.getElementById('easter-video');
+                const easterImage = document.getElementById('easter-image');
+                
+                if (easterEggVisible) {
+                    // Show Easter egg (video and image)
+                    easterEgg.style.display = 'block';
+                } else {
+                    // Hide Easter egg (video and image)
+                    easterEgg.style.display = 'none';
+                    easterVideo.src = ''; // Pause the video when it's hidden
+                }
+            }
+        });
+    </script>
 </body>
 </html>
